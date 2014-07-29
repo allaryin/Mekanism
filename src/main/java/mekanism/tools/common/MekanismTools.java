@@ -50,24 +50,24 @@ public class MekanismTools implements IModule
 
 	// User preferences
 	public enum FeaturePrefs {
-		PAXEL			("paxels"),
-		ARMOR_BRONZE	("bronze.armor"),
-		ARMOR_GLOWSTONE	("glowstone.armor"),
-		ARMOR_LAZULI	("lazuli.armor"),
-		ARMOR_OBSIDIAN	("obsidian.armor"),
-		ARMOR_OSMIUM	("osmium.armor"),
-		ARMOR_STEEL		("steel.armor"),
-		TOOL_BRONZE		("bronze.tools"),
-		TOOL_GLOWSTONE	("glowstone.tools"),
-		TOOL_LAZULI		("lazuli.tools"),
-		TOOL_OBSIDIAN	("obsidian.tools"),
-		TOOL_OSMIUM		("osmium.tools"),
-		TOOL_STEEL		("steel.tools"),
-		ZOMBIE_BRONZE	("bronze.zombies"),
-		ZOMBIE_GLOWSTONE("glowstone.zombies"),
-		ZOMBIE_LAZULI	("lazuli.zombies"),
-		ZOMBIE_OSMIUM	("osmium.zombies"),
-		ZOMBIE_STEEL	("steel.zombies");
+		PAXEL             ("paxels"),
+		ARMOR_BRONZE      ("bronze.armor"),
+		ARMOR_GLOWSTONE   ("glowstone.armor"),
+		ARMOR_LAZULI      ("lazuli.armor"),
+		ARMOR_OBSIDIAN    ("obsidian.armor"),
+		ARMOR_OSMIUM      ("osmium.armor"),
+		ARMOR_STEEL       ("steel.armor"),
+		TOOL_BRONZE       ("bronze.tools"),
+		TOOL_GLOWSTONE    ("glowstone.tools"),
+		TOOL_LAZULI       ("lazuli.tools"),
+		TOOL_OBSIDIAN     ("obsidian.tools"),
+		TOOL_OSMIUM       ("osmium.tools"),
+		TOOL_STEEL        ("steel.tools"),
+		ZOMBIE_BRONZE     ("bronze.zombies"),
+		ZOMBIE_GLOWSTONE  ("glowstone.zombies"),
+		ZOMBIE_LAZULI     ("lazuli.zombies"),
+		ZOMBIE_OSMIUM     ("osmium.zombies"),
+		ZOMBIE_STEEL      ("steel.zombies");
 
 		public boolean 		enabled;	
 		public final String	configName;
