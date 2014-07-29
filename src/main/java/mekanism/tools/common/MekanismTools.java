@@ -51,18 +51,23 @@ public class MekanismTools implements IModule
 	// User preferences
 	public enum FeaturePrefs {
 		PAXEL			("paxels"),
-		TOOL_OBSIDIAN	("obsidian.tools"),
-		TOOL_LAZULI		("lazuli.tools"),
-		TOOL_OSMIUM		("osmium.tools"),
-		TOOL_BRONZE		("bronze.tools"),
-		TOOL_GLOWSTONE	("glowstone.tools"),
-		TOOL_STEEL		("steel.tools"),
-		ARMOR_OBSIDIAN	("obsidian.armor"),
-		ARMOR_LAZULI	("lazuli.armor"),
-		ARMOR_OSMIUM	("osmium.armor"),
 		ARMOR_BRONZE	("bronze.armor"),
 		ARMOR_GLOWSTONE	("glowstone.armor"),
-		ARMOR_STEEL		("steel.armor");
+		ARMOR_LAZULI	("lazuli.armor"),
+		ARMOR_OBSIDIAN	("obsidian.armor"),
+		ARMOR_OSMIUM	("osmium.armor"),
+		ARMOR_STEEL		("steel.armor"),
+		TOOL_BRONZE		("bronze.tools"),
+		TOOL_GLOWSTONE	("glowstone.tools"),
+		TOOL_LAZULI		("lazuli.tools"),
+		TOOL_OBSIDIAN	("obsidian.tools"),
+		TOOL_OSMIUM		("osmium.tools"),
+		TOOL_STEEL		("steel.tools"),
+		ZOMBIE_BRONZE	("bronze.zombies"),
+		ZOMBIE_GLOWSTONE("glowstone.zombies"),
+		ZOMBIE_LAZULI	("lazuli.zombies"),
+		ZOMBIE_OSMIUM	("osmium.zombies"),
+		ZOMBIE_STEEL	("steel.zombies");
 
 		public boolean 		enabled;	
 		public final String	configName;
@@ -895,45 +900,60 @@ public class MekanismTools implements IModule
 				int leggings = event.world.rand.nextInt(100);
 				int boots = event.world.rand.nextInt(100);
 				
-				if(armorType == 0)
+				if(armorType == 0 && FeaturePrefs.ZOMBIE_GLOWSTONE.enabled)
 				{
-					if(event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(GlowstoneSword));
-					if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(GlowstoneHelmet));
-					if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(GlowstoneChestplate));
-					if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(GlowstoneLeggings));
-					if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(GlowstoneBoots));
+					if(FeaturePrefs.TOOL_GLOWSTONE.enabled && event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(GlowstoneSword));
+					if(FeaturePrefs.ARMOR_GLOWSTONE.enabled)
+					{ 
+						if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(GlowstoneHelmet));
+						if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(GlowstoneChestplate));
+						if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(GlowstoneLeggings));
+						if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(GlowstoneBoots));
+					}
 				}
-				else if(armorType == 1)
+				else if(armorType == 1 && FeaturePrefs.ZOMBIE_LAZULI.enabled)
 				{
-					if(event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(LazuliSword));
-					if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(LazuliHelmet));
-					if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(LazuliChestplate));
-					if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(LazuliLeggings));
-					if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(LazuliBoots));
+					if(FeaturePrefs.TOOL_LAZULI.enabled && event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(LazuliSword));
+					if(FeaturePrefs.ARMOR_LAZULI.enabled)
+					{ 
+						if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(LazuliHelmet));
+						if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(LazuliChestplate));
+						if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(LazuliLeggings));
+						if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(LazuliBoots));
+					}
 				}
-				else if(armorType == 2)
+				else if(armorType == 2 && FeaturePrefs.ZOMBIE_OSMIUM.enabled)
 				{
-					if(event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(OsmiumSword));
-					if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(OsmiumHelmet));
-					if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(OsmiumChestplate));
-					if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(OsmiumLeggings));
-					if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(OsmiumBoots));
+					if(FeaturePrefs.TOOL_OSMIUM.enabled && event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(OsmiumSword));
+					if(FeaturePrefs.ARMOR_OSMIUM.enabled)
+					{ 
+						if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(OsmiumHelmet));
+						if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(OsmiumChestplate));
+						if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(OsmiumLeggings));
+						if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(OsmiumBoots));
+					}
 				}
-				else if(armorType == 3)
+				else if(armorType == 3 && FeaturePrefs.ZOMBIE_STEEL.enabled)
 				{
-					if(event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(SteelSword));
-					if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(SteelHelmet));
-					if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(SteelChestplate));
-					if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(SteelLeggings));
-					if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(SteelBoots));
+					if(FeaturePrefs.TOOL_STEEL.enabled && event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(SteelSword));
+					if(FeaturePrefs.ARMOR_STEEL.enabled)
+					{ 
+						if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(SteelHelmet));
+						if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(SteelChestplate));
+						if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(SteelLeggings));
+						if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(SteelBoots));
+					}
 				}
-				else if(armorType == 4)
+				else if(armorType == 4 && FeaturePrefs.ZOMBIE_BRONZE.enabled)
 				{
-					if(event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(BronzeSword));
-					if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(BronzeHelmet));
-					if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(BronzeChestplate));
-					if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(BronzeLeggings));
-					if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(BronzeBoots));
+					if(FeaturePrefs.TOOL_BRONZE.enabled && event.entityLiving instanceof EntityZombie && sword < 50) event.entityLiving.setCurrentItemOrArmor(0, new ItemStack(BronzeSword));
+					if(FeaturePrefs.ARMOR_BRONZE.enabled)
+					{ 
+						if(helmet < 50) event.entityLiving.setCurrentItemOrArmor(1, new ItemStack(BronzeHelmet));
+						if(chestplate < 50) event.entityLiving.setCurrentItemOrArmor(2, new ItemStack(BronzeChestplate));
+						if(leggings < 50) event.entityLiving.setCurrentItemOrArmor(3, new ItemStack(BronzeLeggings));
+						if(boots < 50) event.entityLiving.setCurrentItemOrArmor(4, new ItemStack(BronzeBoots));
+					}
 				}
 			}
 		}
