@@ -48,6 +48,31 @@ public class MekanismTools implements IModule
 	/** MekanismTools version number */
 	public static Version versionNumber = new Version(7, 0, 0);
 
+	// User preferences
+	public enum FeaturePrefs {
+		PAXEL			("paxels"),
+		TOOL_OBSIDIAN	("obsidian.tools"),
+		TOOL_LAZULI		("lazuli.tools"),
+		TOOL_OSMIUM		("osmium.tools"),
+		TOOL_BRONZE		("bronze.tools"),
+		TOOL_GLOWSTONE	("glowstone.tools"),
+		TOOL_STEEL		("steel.tools"),
+		ARMOR_OBSIDIAN	("obsidian.armor"),
+		ARMOR_LAZULI	("lazuli.armor"),
+		ARMOR_OSMIUM	("osmium.armor"),
+		ARMOR_BRONZE	("bronze.armor"),
+		ARMOR_GLOWSTONE	("glowstone.armor"),
+		ARMOR_STEEL		("steel.armor");
+
+		public boolean 		enabled;	
+		public final String	configName;
+
+		private FeaturePrefs(String name) {
+			enabled = true;
+			configName = name;
+		}
+	};
+
 	//Enums: Tools
 	public static ToolMaterial toolOBSIDIAN;
 	public static ToolMaterial toolOBSIDIAN2;
@@ -89,7 +114,7 @@ public class MekanismTools implements IModule
 	public static Item GlowstoneLeggings;
 	public static Item GlowstoneBoots;
 	
-	//Redstone Items
+	//Bronze Items
 	public static Item BronzePaxel;
 	public static Item BronzePickaxe;
 	public static Item BronzeAxe;
@@ -177,213 +202,251 @@ public class MekanismTools implements IModule
 	{
 		//Crafting Recipes
 		//Base
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(WoodPaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), Items.wooden_axe, Character.valueOf('Y'), Items.wooden_pickaxe, Character.valueOf('Z'), Items.wooden_shovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(StonePaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), Items.stone_axe, Character.valueOf('Y'), Items.stone_pickaxe, Character.valueOf('Z'), Items.stone_shovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(IronPaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), Items.iron_axe, Character.valueOf('Y'), Items.iron_pickaxe, Character.valueOf('Z'), Items.iron_shovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(DiamondPaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), Items.diamond_axe, Character.valueOf('Y'), Items.diamond_pickaxe, Character.valueOf('Z'), Items.diamond_shovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GoldPaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), Items.golden_axe, Character.valueOf('Y'), Items.golden_pickaxe, Character.valueOf('Z'), Items.golden_shovel, Character.valueOf('T'), Items.stick
-		}));
+		if( FeaturePrefs.PAXEL.enabled ) {
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(WoodPaxel, 1), new Object[] {
+				"XYZ", " T ", " T ", Character.valueOf('X'), Items.wooden_axe, Character.valueOf('Y'), Items.wooden_pickaxe, Character.valueOf('Z'), Items.wooden_shovel, Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(StonePaxel, 1), new Object[] {
+				"XYZ", " T ", " T ", Character.valueOf('X'), Items.stone_axe, Character.valueOf('Y'), Items.stone_pickaxe, Character.valueOf('Z'), Items.stone_shovel, Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(IronPaxel, 1), new Object[] {
+				"XYZ", " T ", " T ", Character.valueOf('X'), Items.iron_axe, Character.valueOf('Y'), Items.iron_pickaxe, Character.valueOf('Z'), Items.iron_shovel, Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(DiamondPaxel, 1), new Object[] {
+				"XYZ", " T ", " T ", Character.valueOf('X'), Items.diamond_axe, Character.valueOf('Y'), Items.diamond_pickaxe, Character.valueOf('Z'), Items.diamond_shovel, Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GoldPaxel, 1), new Object[] {
+				"XYZ", " T ", " T ", Character.valueOf('X'), Items.golden_axe, Character.valueOf('Y'), Items.golden_pickaxe, Character.valueOf('Z'), Items.golden_shovel, Character.valueOf('T'), Items.stick
+			}));
+		}
 		
 		//Obsidian
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianHelmet, 1), new Object[] {
-			"***", "* *", Character.valueOf('*'), "ingotRefinedObsidian"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianChestplate, 1), new Object[] {
-			"* *", "***", "***", Character.valueOf('*'), "ingotRefinedObsidian"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianLeggings, 1), new Object[] {
-			"***", "* *", "* *", Character.valueOf('*'), "ingotRefinedObsidian"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianBoots, 1), new Object[] {
-			"* *", "* *", Character.valueOf('*'), "ingotRefinedObsidian"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianPaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), ObsidianAxe, Character.valueOf('Y'), ObsidianPickaxe, Character.valueOf('Z'), ObsidianShovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianPickaxe, 1), new Object[] {
-			"XXX", " T ", " T ", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianAxe, 1), new Object[] {
-			"XX", "XT", " T", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianShovel, 1), new Object[] {
-			"X", "T", "T", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianHoe, 1), new Object[] {
-			"XX", " T", " T", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianSword, 1), new Object[] {
-			"X", "X", "T", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
-		}));
+		if( FeaturePrefs.ARMOR_OBSIDIAN.enabled ) {
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianHelmet, 1), new Object[] {
+				"***", "* *", Character.valueOf('*'), "ingotRefinedObsidian"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianChestplate, 1), new Object[] {
+				"* *", "***", "***", Character.valueOf('*'), "ingotRefinedObsidian"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianLeggings, 1), new Object[] {
+				"***", "* *", "* *", Character.valueOf('*'), "ingotRefinedObsidian"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianBoots, 1), new Object[] {
+				"* *", "* *", Character.valueOf('*'), "ingotRefinedObsidian"
+			}));
+		}
+		if( FeaturePrefs.TOOL_OBSIDIAN.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianPaxel, 1), new Object[] {
+					"XYZ", " T ", " T ", Character.valueOf('X'), ObsidianAxe, Character.valueOf('Y'), ObsidianPickaxe, Character.valueOf('Z'), ObsidianShovel, Character.valueOf('T'), Items.stick
+				}));
+			}
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianPickaxe, 1), new Object[] {
+				"XXX", " T ", " T ", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianAxe, 1), new Object[] {
+				"XX", "XT", " T", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianShovel, 1), new Object[] {
+				"X", "T", "T", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianHoe, 1), new Object[] {
+				"XX", " T", " T", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(ObsidianSword, 1), new Object[] {
+				"X", "X", "T", Character.valueOf('X'), "ingotRefinedObsidian", Character.valueOf('T'), Items.stick
+			}));
+		}
 		
 		//Glowstone
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstonePaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), GlowstoneAxe, Character.valueOf('Y'), GlowstonePickaxe, Character.valueOf('Z'), GlowstoneShovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstonePickaxe, 1), new Object[] {
-			"XXX", " T ", " T ", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneAxe, 1), new Object[] {
-			"XX", "XT", " T", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneShovel, 1), new Object[] {
-			"X", "T", "T", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneHoe, 1), new Object[] {
-			"XX", " T", " T", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneSword, 1), new Object[] {
-			"X", "X", "T", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneHelmet, 1), new Object[] {
-			"***", "* *", Character.valueOf('*'), "ingotRefinedGlowstone"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneChestplate, 1), new Object[] {
-			"* *", "***", "***", Character.valueOf('*'), "ingotRefinedGlowstone"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneLeggings, 1), new Object[] {
-			"***", "* *", "* *", Character.valueOf('*'), "ingotRefinedGlowstone"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneBoots, 1), new Object[] {
-			"* *", "* *", Character.valueOf('*'), "ingotRefinedGlowstone"
-		}));
+		if( FeaturePrefs.TOOL_GLOWSTONE.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstonePaxel, 1), new Object[] {
+					"XYZ", " T ", " T ", Character.valueOf('X'), GlowstoneAxe, Character.valueOf('Y'), GlowstonePickaxe, Character.valueOf('Z'), GlowstoneShovel, Character.valueOf('T'), Items.stick
+				}));
+			}
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstonePickaxe, 1), new Object[] {
+				"XXX", " T ", " T ", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneAxe, 1), new Object[] {
+				"XX", "XT", " T", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneShovel, 1), new Object[] {
+				"X", "T", "T", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneHoe, 1), new Object[] {
+				"XX", " T", " T", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneSword, 1), new Object[] {
+				"X", "X", "T", Character.valueOf('X'), "ingotRefinedGlowstone", Character.valueOf('T'), Items.stick
+			}));
+		}
+		if( FeaturePrefs.ARMOR_GLOWSTONE.enabled ) {
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneHelmet, 1), new Object[] {
+				"***", "* *", Character.valueOf('*'), "ingotRefinedGlowstone"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneChestplate, 1), new Object[] {
+				"* *", "***", "***", Character.valueOf('*'), "ingotRefinedGlowstone"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneLeggings, 1), new Object[] {
+				"***", "* *", "* *", Character.valueOf('*'), "ingotRefinedGlowstone"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(GlowstoneBoots, 1), new Object[] {
+				"* *", "* *", Character.valueOf('*'), "ingotRefinedGlowstone"
+			}));
+		}
 		
 		//Lazuli
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliHelmet, 1), new Object[] {
-			"***", "* *", Character.valueOf('*'), new ItemStack(Items.dye, 1, 4)
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliChestplate, 1), new Object[] {
-			"* *", "***", "***", Character.valueOf('*'), new ItemStack(Items.dye, 1, 4)
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliLeggings, 1), new Object[] {
-			"***", "* *", "* *", Character.valueOf('*'), new ItemStack(Items.dye, 1, 4)
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliBoots, 1), new Object[] {
-			"* *", "* *", Character.valueOf('*'), new ItemStack(Items.dye, 1, 4)
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliPaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), LazuliAxe, Character.valueOf('Y'), LazuliPickaxe, Character.valueOf('Z'), LazuliShovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliPickaxe, 1), new Object[] {
-			"XXX", " T ", " T ", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliAxe, 1), new Object[] {
-			"XX", "XT", " T", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliShovel, 1), new Object[] {
-			"X", "T", "T", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliHoe, 1), new Object[] {
-			"XX", " T", " T", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliSword, 1), new Object[] {
-			"X", "X", "T", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
-		}));
+		if( FeaturePrefs.ARMOR_LAZULI.enabled ) {
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliHelmet, 1), new Object[] {
+				"***", "* *", Character.valueOf('*'), new ItemStack(Items.dye, 1, 4)
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliChestplate, 1), new Object[] {
+				"* *", "***", "***", Character.valueOf('*'), new ItemStack(Items.dye, 1, 4)
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliLeggings, 1), new Object[] {
+				"***", "* *", "* *", Character.valueOf('*'), new ItemStack(Items.dye, 1, 4)
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliBoots, 1), new Object[] {
+				"* *", "* *", Character.valueOf('*'), new ItemStack(Items.dye, 1, 4)
+			}));
+		}
+		if( FeaturePrefs.TOOL_LAZULI.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliPaxel, 1), new Object[] {
+					"XYZ", " T ", " T ", Character.valueOf('X'), LazuliAxe, Character.valueOf('Y'), LazuliPickaxe, Character.valueOf('Z'), LazuliShovel, Character.valueOf('T'), Items.stick
+				}));
+			}
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliPickaxe, 1), new Object[] {
+				"XXX", " T ", " T ", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliAxe, 1), new Object[] {
+				"XX", "XT", " T", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliShovel, 1), new Object[] {
+				"X", "T", "T", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliHoe, 1), new Object[] {
+				"XX", " T", " T", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(LazuliSword, 1), new Object[] {
+				"X", "X", "T", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('T'), Items.stick
+			}));
+		}
 		
 		//Osmium
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumPaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), OsmiumAxe, Character.valueOf('Y'), OsmiumPickaxe, Character.valueOf('Z'), OsmiumShovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumPickaxe, 1), new Object[] {
-			"XXX", " T ", " T ", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumAxe, 1), new Object[] {
-			"XX", "XT", " T", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumShovel, 1), new Object[] {
-			"X", "T", "T", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumHoe, 1), new Object[] {
-			"XX", " T", " T", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumSword, 1), new Object[] {
-			"X", "X", "T", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumHelmet, 1), new Object[] {
-			"***", "* *", Character.valueOf('*'), "ingotOsmium"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumChestplate, 1), new Object[] {
-			"* *", "***", "***", Character.valueOf('*'), "ingotOsmium"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumLeggings, 1), new Object[] {
-			"***", "* *", "* *", Character.valueOf('*'), "ingotOsmium"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumBoots, 1), new Object[] {
-			"* *", "* *", Character.valueOf('*'), "ingotOsmium"
-		}));
+		if( FeaturePrefs.TOOL_OSMIUM.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumPaxel, 1), new Object[] {
+					"XYZ", " T ", " T ", Character.valueOf('X'), OsmiumAxe, Character.valueOf('Y'), OsmiumPickaxe, Character.valueOf('Z'), OsmiumShovel, Character.valueOf('T'), Items.stick
+				}));
+			}
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumPickaxe, 1), new Object[] {
+				"XXX", " T ", " T ", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumAxe, 1), new Object[] {
+				"XX", "XT", " T", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumShovel, 1), new Object[] {
+				"X", "T", "T", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumHoe, 1), new Object[] {
+				"XX", " T", " T", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumSword, 1), new Object[] {
+				"X", "X", "T", Character.valueOf('X'), "ingotOsmium", Character.valueOf('T'), Items.stick
+			}));
+		}
+		if( FeaturePrefs.ARMOR_OSMIUM.enabled ) {
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumHelmet, 1), new Object[] {
+				"***", "* *", Character.valueOf('*'), "ingotOsmium"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumChestplate, 1), new Object[] {
+				"* *", "***", "***", Character.valueOf('*'), "ingotOsmium"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumLeggings, 1), new Object[] {
+				"***", "* *", "* *", Character.valueOf('*'), "ingotOsmium"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(OsmiumBoots, 1), new Object[] {
+				"* *", "* *", Character.valueOf('*'), "ingotOsmium"
+			}));
+		}
 		
 		//Bronze
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzePaxel, 1), new Object[] {
-			"XYZ", " T ", " T ", Character.valueOf('X'), BronzeAxe, Character.valueOf('Y'), BronzePickaxe, Character.valueOf('Z'), BronzeShovel, Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzePickaxe, 1), new Object[] {
-			"XXX", " T ", " T ", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeAxe, 1), new Object[] {
-			"XX", "XT", " T", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeShovel, 1), new Object[] {
-			"X", "T", "T", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeHoe, 1), new Object[] {
-			"XX", " T", " T", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeSword, 1), new Object[] {
-			"X", "X", "T", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeHelmet, 1), new Object[] {
-			"***", "* *", Character.valueOf('*'), "ingotBronze"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeChestplate, 1), new Object[] {
-			"* *", "***", "***", Character.valueOf('*'), "ingotBronze"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeLeggings, 1), new Object[] {
-			"***", "* *", "* *", Character.valueOf('*'), "ingotBronze"
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeBoots, 1), new Object[] {
-			"* *", "* *", Character.valueOf('*'), "ingotBronze"
-		}));
-		
+		if( FeaturePrefs.TOOL_BRONZE.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzePaxel, 1), new Object[] {
+					"XYZ", " T ", " T ", Character.valueOf('X'), BronzeAxe, Character.valueOf('Y'), BronzePickaxe, Character.valueOf('Z'), BronzeShovel, Character.valueOf('T'), Items.stick
+				}));
+			}
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzePickaxe, 1), new Object[] {
+				"XXX", " T ", " T ", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeAxe, 1), new Object[] {
+				"XX", "XT", " T", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeShovel, 1), new Object[] {
+				"X", "T", "T", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeHoe, 1), new Object[] {
+				"XX", " T", " T", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeSword, 1), new Object[] {
+				"X", "X", "T", Character.valueOf('X'), "ingotBronze", Character.valueOf('T'), Items.stick
+			}));
+		}
+		if( FeaturePrefs.ARMOR_BRONZE.enabled ) {
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeHelmet, 1), new Object[] {
+				"***", "* *", Character.valueOf('*'), "ingotBronze"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeChestplate, 1), new Object[] {
+				"* *", "***", "***", Character.valueOf('*'), "ingotBronze"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeLeggings, 1), new Object[] {
+				"***", "* *", "* *", Character.valueOf('*'), "ingotBronze"
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(BronzeBoots, 1), new Object[] {
+				"* *", "* *", Character.valueOf('*'), "ingotBronze"
+			}));
+		}
+
 		//Steel
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelPaxel, 1), new Object[] {
-			"XYZ", " I ", " I ", Character.valueOf('X'), SteelAxe, Character.valueOf('Y'), SteelPickaxe, Character.valueOf('Z'), SteelShovel, Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelPickaxe, 1), new Object[] {
-			"XXX", " I ", " I ", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelAxe, 1), new Object[] {
-			"XX", "XI", " I", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelShovel, 1), new Object[] {
-			"X", "I", "I", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelHoe, 1), new Object[] {
-			"XX", " I", " I", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelSword, 1), new Object[] {
-			"X", "X", "I", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelHelmet, 1), new Object[] {
-			"***", "I I", Character.valueOf('*'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelChestplate, 1), new Object[] {
-			"I I", "*I*", "***", Character.valueOf('*'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelLeggings, 1), new Object[] {
-			"I*I", "* *", "* *", Character.valueOf('*'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
-		CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelBoots, 1), new Object[] {
-			"I *", "* I", Character.valueOf('*'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
-		}));
+		if( FeaturePrefs.TOOL_STEEL.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelPaxel, 1), new Object[] {
+					"XYZ", " I ", " I ", Character.valueOf('X'), SteelAxe, Character.valueOf('Y'), SteelPickaxe, Character.valueOf('Z'), SteelShovel, Character.valueOf('I'), Items.iron_ingot
+				}));
+			}
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelPickaxe, 1), new Object[] {
+				"XXX", " I ", " I ", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelAxe, 1), new Object[] {
+				"XX", "XI", " I", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelShovel, 1), new Object[] {
+				"X", "I", "I", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelHoe, 1), new Object[] {
+				"XX", " I", " I", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelSword, 1), new Object[] {
+				"X", "X", "I", Character.valueOf('X'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+		}
+		if( FeaturePrefs.ARMOR_STEEL.enabled ) {
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelHelmet, 1), new Object[] {
+				"***", "I I", Character.valueOf('*'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelChestplate, 1), new Object[] {
+				"I I", "*I*", "***", Character.valueOf('*'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelLeggings, 1), new Object[] {
+				"I*I", "* *", "* *", Character.valueOf('*'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+			CraftingManager.getInstance().getRecipeList().add(new MekanismRecipe(new ItemStack(SteelBoots, 1), new Object[] {
+				"I *", "* I", Character.valueOf('*'), "ingotSteel", Character.valueOf('I'), Items.iron_ingot
+			}));
+		}
 	}
 	
 	public void addItems()
@@ -543,201 +606,277 @@ public class MekanismTools implements IModule
 		);
 
 		//Bronze
-		BronzeHelmet = (new ItemMekanismArmor(armorBRONZE, Mekanism.proxy.getArmorIndex("bronze"), 0)).setUnlocalizedName("BronzeHelmet");
-		BronzeChestplate = (new ItemMekanismArmor(armorBRONZE, Mekanism.proxy.getArmorIndex("bronze"), 1)).setUnlocalizedName("BronzeChestplate");
-		BronzeLeggings = (new ItemMekanismArmor(armorBRONZE, Mekanism.proxy.getArmorIndex("bronze"), 2)).setUnlocalizedName("BronzeLeggings");
-		BronzeBoots = (new ItemMekanismArmor(armorBRONZE, Mekanism.proxy.getArmorIndex("bronze"), 3)).setUnlocalizedName("BronzeBoots");
-		BronzePaxel = new ItemMekanismPaxel(toolBRONZE2).setUnlocalizedName("BronzePaxel");
-		BronzePickaxe = new ItemMekanismPickaxe(toolBRONZE).setUnlocalizedName("BronzePickaxe");
-		BronzeAxe = new ItemMekanismAxe(toolBRONZE).setUnlocalizedName("BronzeAxe");
-		BronzeShovel = new ItemMekanismShovel(toolBRONZE).setUnlocalizedName("BronzeShovel");
-		BronzeHoe = new ItemMekanismHoe(toolBRONZE).setUnlocalizedName("BronzeHoe");
-		BronzeSword = new ItemMekanismSword(toolBRONZE).setUnlocalizedName("BronzeSword");
-		
-		BronzePaxel.setHarvestLevel("paxel", toolBRONZE2.getHarvestLevel());
-		BronzePickaxe.setHarvestLevel("pickaxe", toolBRONZE.getHarvestLevel());
-		BronzeAxe.setHarvestLevel("axe", toolBRONZE.getHarvestLevel());
-		BronzeShovel.setHarvestLevel("shovel", toolBRONZE.getHarvestLevel());
+		if( FeaturePrefs.ARMOR_BRONZE.enabled ) {
+			BronzeHelmet = (new ItemMekanismArmor(armorBRONZE, Mekanism.proxy.getArmorIndex("bronze"), 0)).setUnlocalizedName("BronzeHelmet");
+			BronzeChestplate = (new ItemMekanismArmor(armorBRONZE, Mekanism.proxy.getArmorIndex("bronze"), 1)).setUnlocalizedName("BronzeChestplate");
+			BronzeLeggings = (new ItemMekanismArmor(armorBRONZE, Mekanism.proxy.getArmorIndex("bronze"), 2)).setUnlocalizedName("BronzeLeggings");
+			BronzeBoots = (new ItemMekanismArmor(armorBRONZE, Mekanism.proxy.getArmorIndex("bronze"), 3)).setUnlocalizedName("BronzeBoots");
+		}
+		if( FeaturePrefs.TOOL_BRONZE.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				BronzePaxel = new ItemMekanismPaxel(toolBRONZE2).setUnlocalizedName("BronzePaxel");
+				BronzePaxel.setHarvestLevel("paxel", toolBRONZE2.getHarvestLevel());
+			}
+			BronzePickaxe = new ItemMekanismPickaxe(toolBRONZE).setUnlocalizedName("BronzePickaxe");
+			BronzeAxe = new ItemMekanismAxe(toolBRONZE).setUnlocalizedName("BronzeAxe");
+			BronzeShovel = new ItemMekanismShovel(toolBRONZE).setUnlocalizedName("BronzeShovel");
+			BronzeHoe = new ItemMekanismHoe(toolBRONZE).setUnlocalizedName("BronzeHoe");
+			BronzeSword = new ItemMekanismSword(toolBRONZE).setUnlocalizedName("BronzeSword");		
+
+			BronzePickaxe.setHarvestLevel("pickaxe", toolBRONZE.getHarvestLevel());
+			BronzeAxe.setHarvestLevel("axe", toolBRONZE.getHarvestLevel());
+			BronzeShovel.setHarvestLevel("shovel", toolBRONZE.getHarvestLevel());
+		}
 		
 		//Osmium
-		OsmiumHelmet = (new ItemMekanismArmor(armorOSMIUM, Mekanism.proxy.getArmorIndex("osmium"), 0)).setUnlocalizedName("OsmiumHelmet");
-		OsmiumChestplate = (new ItemMekanismArmor(armorOSMIUM, Mekanism.proxy.getArmorIndex("osmium"), 1)).setUnlocalizedName("OsmiumChestplate");
-		OsmiumLeggings = (new ItemMekanismArmor(armorOSMIUM, Mekanism.proxy.getArmorIndex("osmium"), 2)).setUnlocalizedName("OsmiumLeggings");
-		OsmiumBoots = (new ItemMekanismArmor(armorOSMIUM, Mekanism.proxy.getArmorIndex("osmium"), 3)).setUnlocalizedName("OsmiumBoots");
-		OsmiumPaxel = new ItemMekanismPaxel(toolOSMIUM2).setUnlocalizedName("OsmiumPaxel");
-		OsmiumPickaxe = new ItemMekanismPickaxe(toolOSMIUM).setUnlocalizedName("OsmiumPickaxe");
-		OsmiumAxe = new ItemMekanismAxe(toolOSMIUM).setUnlocalizedName("OsmiumAxe");
-		OsmiumShovel = new ItemMekanismShovel(toolOSMIUM).setUnlocalizedName("OsmiumShovel");
-		OsmiumHoe = new ItemMekanismHoe(toolOSMIUM).setUnlocalizedName("OsmiumHoe");
-		OsmiumSword = new ItemMekanismSword(toolOSMIUM).setUnlocalizedName("OsmiumSword");
-		
-		OsmiumPaxel.setHarvestLevel("paxel", toolOSMIUM2.getHarvestLevel());
-		OsmiumPickaxe.setHarvestLevel("pickaxe", toolOSMIUM.getHarvestLevel());
-		OsmiumAxe.setHarvestLevel("axe", toolOSMIUM.getHarvestLevel());
-		OsmiumShovel.setHarvestLevel("shovel", toolOSMIUM.getHarvestLevel());
-		
+		if( FeaturePrefs.ARMOR_OSMIUM.enabled ) {
+			OsmiumHelmet = (new ItemMekanismArmor(armorOSMIUM, Mekanism.proxy.getArmorIndex("osmium"), 0)).setUnlocalizedName("OsmiumHelmet");
+			OsmiumChestplate = (new ItemMekanismArmor(armorOSMIUM, Mekanism.proxy.getArmorIndex("osmium"), 1)).setUnlocalizedName("OsmiumChestplate");
+			OsmiumLeggings = (new ItemMekanismArmor(armorOSMIUM, Mekanism.proxy.getArmorIndex("osmium"), 2)).setUnlocalizedName("OsmiumLeggings");
+			OsmiumBoots = (new ItemMekanismArmor(armorOSMIUM, Mekanism.proxy.getArmorIndex("osmium"), 3)).setUnlocalizedName("OsmiumBoots");
+		}
+		if( FeaturePrefs.TOOL_OSMIUM.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				OsmiumPaxel = new ItemMekanismPaxel(toolOSMIUM2).setUnlocalizedName("OsmiumPaxel");
+				OsmiumPaxel.setHarvestLevel("paxel", toolOSMIUM2.getHarvestLevel());
+			}
+			OsmiumPickaxe = new ItemMekanismPickaxe(toolOSMIUM).setUnlocalizedName("OsmiumPickaxe");
+			OsmiumAxe = new ItemMekanismAxe(toolOSMIUM).setUnlocalizedName("OsmiumAxe");
+			OsmiumShovel = new ItemMekanismShovel(toolOSMIUM).setUnlocalizedName("OsmiumShovel");
+			OsmiumHoe = new ItemMekanismHoe(toolOSMIUM).setUnlocalizedName("OsmiumHoe");
+			OsmiumSword = new ItemMekanismSword(toolOSMIUM).setUnlocalizedName("OsmiumSword");
+			
+			OsmiumPickaxe.setHarvestLevel("pickaxe", toolOSMIUM.getHarvestLevel());
+			OsmiumAxe.setHarvestLevel("axe", toolOSMIUM.getHarvestLevel());
+			OsmiumShovel.setHarvestLevel("shovel", toolOSMIUM.getHarvestLevel());
+		}
+
 		//Obsidian
-		ObsidianHelmet = (new ItemMekanismArmor(armorOBSIDIAN, Mekanism.proxy.getArmorIndex("obsidian"), 0)).setUnlocalizedName("ObsidianHelmet");
-		ObsidianChestplate = (new ItemMekanismArmor(armorOBSIDIAN, Mekanism.proxy.getArmorIndex("obsidian"), 1)).setUnlocalizedName("ObsidianChestplate");
-		ObsidianLeggings = (new ItemMekanismArmor(armorOBSIDIAN, Mekanism.proxy.getArmorIndex("obsidian"), 2)).setUnlocalizedName("ObsidianLeggings");
-		ObsidianBoots = (new ItemMekanismArmor(armorOBSIDIAN, Mekanism.proxy.getArmorIndex("obsidian"), 3)).setUnlocalizedName("ObsidianBoots");
-		ObsidianPaxel = new ItemMekanismPaxel(toolOBSIDIAN2).setUnlocalizedName("ObsidianPaxel");
-		ObsidianPickaxe = new ItemMekanismPickaxe(toolOBSIDIAN).setUnlocalizedName("ObsidianPickaxe");
-		ObsidianAxe = new ItemMekanismAxe(toolOBSIDIAN).setUnlocalizedName("ObsidianAxe");
-		ObsidianShovel = new ItemMekanismShovel(toolOBSIDIAN).setUnlocalizedName("ObsidianShovel");
-		ObsidianHoe = new ItemMekanismHoe(toolOBSIDIAN).setUnlocalizedName("ObsidianHoe");
-		ObsidianSword = new ItemMekanismSword(toolOBSIDIAN).setUnlocalizedName("ObsidianSword");
-		
-		ObsidianPaxel.setHarvestLevel("paxel", toolOBSIDIAN2.getHarvestLevel());
-		ObsidianPickaxe.setHarvestLevel("pickaxe", toolOBSIDIAN.getHarvestLevel());
-		ObsidianAxe.setHarvestLevel("axe", toolOBSIDIAN.getHarvestLevel());
-		ObsidianShovel.setHarvestLevel("shovel", toolOBSIDIAN.getHarvestLevel());
-		
+		if( FeaturePrefs.ARMOR_OBSIDIAN.enabled ) {
+			ObsidianHelmet = (new ItemMekanismArmor(armorOBSIDIAN, Mekanism.proxy.getArmorIndex("obsidian"), 0)).setUnlocalizedName("ObsidianHelmet");
+			ObsidianChestplate = (new ItemMekanismArmor(armorOBSIDIAN, Mekanism.proxy.getArmorIndex("obsidian"), 1)).setUnlocalizedName("ObsidianChestplate");
+			ObsidianLeggings = (new ItemMekanismArmor(armorOBSIDIAN, Mekanism.proxy.getArmorIndex("obsidian"), 2)).setUnlocalizedName("ObsidianLeggings");
+			ObsidianBoots = (new ItemMekanismArmor(armorOBSIDIAN, Mekanism.proxy.getArmorIndex("obsidian"), 3)).setUnlocalizedName("ObsidianBoots");
+		}
+		if( FeaturePrefs.TOOL_OBSIDIAN.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				ObsidianPaxel = new ItemMekanismPaxel(toolOBSIDIAN2).setUnlocalizedName("ObsidianPaxel");
+				ObsidianPaxel.setHarvestLevel("paxel", toolOBSIDIAN2.getHarvestLevel());
+			}
+			ObsidianPickaxe = new ItemMekanismPickaxe(toolOBSIDIAN).setUnlocalizedName("ObsidianPickaxe");
+			ObsidianAxe = new ItemMekanismAxe(toolOBSIDIAN).setUnlocalizedName("ObsidianAxe");
+			ObsidianShovel = new ItemMekanismShovel(toolOBSIDIAN).setUnlocalizedName("ObsidianShovel");
+			ObsidianHoe = new ItemMekanismHoe(toolOBSIDIAN).setUnlocalizedName("ObsidianHoe");
+			ObsidianSword = new ItemMekanismSword(toolOBSIDIAN).setUnlocalizedName("ObsidianSword");
+			
+			ObsidianPickaxe.setHarvestLevel("pickaxe", toolOBSIDIAN.getHarvestLevel());
+			ObsidianAxe.setHarvestLevel("axe", toolOBSIDIAN.getHarvestLevel());
+			ObsidianShovel.setHarvestLevel("shovel", toolOBSIDIAN.getHarvestLevel());
+		}
+
 		//Lazuli
-		LazuliHelmet = (new ItemMekanismArmor(armorLAZULI, Mekanism.proxy.getArmorIndex("lazuli"), 0)).setUnlocalizedName("LazuliHelmet");
-		LazuliChestplate = (new ItemMekanismArmor(armorLAZULI, Mekanism.proxy.getArmorIndex("lazuli"), 1)).setUnlocalizedName("LazuliChestplate");
-		LazuliLeggings = (new ItemMekanismArmor(armorLAZULI, Mekanism.proxy.getArmorIndex("lazuli"), 2)).setUnlocalizedName("LazuliLeggings");
-		LazuliBoots = (new ItemMekanismArmor(armorLAZULI, Mekanism.proxy.getArmorIndex("lazuli"), 3)).setUnlocalizedName("LazuliBoots");
-		LazuliPaxel = new ItemMekanismPaxel(toolLAZULI2).setUnlocalizedName("LazuliPaxel");
-		LazuliPickaxe = new ItemMekanismPickaxe(toolLAZULI).setUnlocalizedName("LazuliPickaxe");
-		LazuliAxe = new ItemMekanismAxe(toolLAZULI).setUnlocalizedName("LazuliAxe");
-		LazuliShovel = new ItemMekanismShovel(toolLAZULI).setUnlocalizedName("LazuliShovel");
-		LazuliHoe = new ItemMekanismHoe(toolLAZULI).setUnlocalizedName("LazuliHoe");
-		LazuliSword = new ItemMekanismSword(toolLAZULI).setUnlocalizedName("LazuliSword");
-		
-		LazuliPaxel.setHarvestLevel("paxel", toolLAZULI2.getHarvestLevel());
-		LazuliPickaxe.setHarvestLevel("pickaxe", toolLAZULI.getHarvestLevel());
-		LazuliAxe.setHarvestLevel("axe", toolLAZULI.getHarvestLevel());
-		LazuliShovel.setHarvestLevel("shovel", toolLAZULI.getHarvestLevel());
-		
+		if( FeaturePrefs.ARMOR_LAZULI.enabled ) {
+			LazuliHelmet = (new ItemMekanismArmor(armorLAZULI, Mekanism.proxy.getArmorIndex("lazuli"), 0)).setUnlocalizedName("LazuliHelmet");
+			LazuliChestplate = (new ItemMekanismArmor(armorLAZULI, Mekanism.proxy.getArmorIndex("lazuli"), 1)).setUnlocalizedName("LazuliChestplate");
+			LazuliLeggings = (new ItemMekanismArmor(armorLAZULI, Mekanism.proxy.getArmorIndex("lazuli"), 2)).setUnlocalizedName("LazuliLeggings");
+			LazuliBoots = (new ItemMekanismArmor(armorLAZULI, Mekanism.proxy.getArmorIndex("lazuli"), 3)).setUnlocalizedName("LazuliBoots");
+		}
+		if( FeaturePrefs.TOOL_LAZULI.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				LazuliPaxel = new ItemMekanismPaxel(toolLAZULI2).setUnlocalizedName("LazuliPaxel");
+				LazuliPaxel.setHarvestLevel("paxel", toolLAZULI2.getHarvestLevel());
+			}
+			LazuliPickaxe = new ItemMekanismPickaxe(toolLAZULI).setUnlocalizedName("LazuliPickaxe");
+			LazuliAxe = new ItemMekanismAxe(toolLAZULI).setUnlocalizedName("LazuliAxe");
+			LazuliShovel = new ItemMekanismShovel(toolLAZULI).setUnlocalizedName("LazuliShovel");
+			LazuliHoe = new ItemMekanismHoe(toolLAZULI).setUnlocalizedName("LazuliHoe");
+			LazuliSword = new ItemMekanismSword(toolLAZULI).setUnlocalizedName("LazuliSword");
+			
+			LazuliPickaxe.setHarvestLevel("pickaxe", toolLAZULI.getHarvestLevel());
+			LazuliAxe.setHarvestLevel("axe", toolLAZULI.getHarvestLevel());
+			LazuliShovel.setHarvestLevel("shovel", toolLAZULI.getHarvestLevel());
+		}
+
 		//Glowstone
-		GlowstoneHelmet = new ItemMekanismArmor(armorGLOWSTONE, Mekanism.proxy.getArmorIndex("glowstone"), 0).setUnlocalizedName("GlowstoneHelmet");
-		GlowstoneChestplate = new ItemMekanismArmor(armorGLOWSTONE, Mekanism.proxy.getArmorIndex("glowstone"), 1).setUnlocalizedName("GlowstoneChestplate");
-		GlowstoneLeggings = new ItemMekanismArmor(armorGLOWSTONE, Mekanism.proxy.getArmorIndex("glowstone"), 2).setUnlocalizedName("GlowstoneLeggings");
-		GlowstoneBoots = new ItemMekanismArmor(armorGLOWSTONE, Mekanism.proxy.getArmorIndex("glowstone"), 3).setUnlocalizedName("GlowstoneBoots");
-		GlowstonePaxel = new ItemMekanismPaxel(toolGLOWSTONE2).setUnlocalizedName("GlowstonePaxel");
-		GlowstonePickaxe = new ItemMekanismPickaxe(toolGLOWSTONE).setUnlocalizedName("GlowstonePickaxe");
-		GlowstoneAxe = new ItemMekanismAxe(toolGLOWSTONE).setUnlocalizedName("GlowstoneAxe");
-		GlowstoneShovel = new ItemMekanismShovel(toolGLOWSTONE).setUnlocalizedName("GlowstoneShovel");
-		GlowstoneHoe = new ItemMekanismHoe(toolGLOWSTONE).setUnlocalizedName("GlowstoneHoe");
-		GlowstoneSword = new ItemMekanismSword(toolGLOWSTONE).setUnlocalizedName("GlowstoneSword");
-		
-		GlowstonePaxel.setHarvestLevel("paxel", toolGLOWSTONE2.getHarvestLevel());
-		GlowstonePickaxe.setHarvestLevel("pickaxe", toolGLOWSTONE.getHarvestLevel());
-		GlowstoneAxe.setHarvestLevel("axe", toolGLOWSTONE.getHarvestLevel());
-		GlowstoneShovel.setHarvestLevel("shovel", toolGLOWSTONE.getHarvestLevel());
-		
+		if( FeaturePrefs.ARMOR_GLOWSTONE.enabled ) {
+			GlowstoneHelmet = new ItemMekanismArmor(armorGLOWSTONE, Mekanism.proxy.getArmorIndex("glowstone"), 0).setUnlocalizedName("GlowstoneHelmet");
+			GlowstoneChestplate = new ItemMekanismArmor(armorGLOWSTONE, Mekanism.proxy.getArmorIndex("glowstone"), 1).setUnlocalizedName("GlowstoneChestplate");
+			GlowstoneLeggings = new ItemMekanismArmor(armorGLOWSTONE, Mekanism.proxy.getArmorIndex("glowstone"), 2).setUnlocalizedName("GlowstoneLeggings");
+			GlowstoneBoots = new ItemMekanismArmor(armorGLOWSTONE, Mekanism.proxy.getArmorIndex("glowstone"), 3).setUnlocalizedName("GlowstoneBoots");
+		}
+		if( FeaturePrefs.TOOL_GLOWSTONE.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				GlowstonePaxel = new ItemMekanismPaxel(toolGLOWSTONE2).setUnlocalizedName("GlowstonePaxel");
+				GlowstonePaxel.setHarvestLevel("paxel", toolGLOWSTONE2.getHarvestLevel());
+			}
+			GlowstonePickaxe = new ItemMekanismPickaxe(toolGLOWSTONE).setUnlocalizedName("GlowstonePickaxe");
+			GlowstoneAxe = new ItemMekanismAxe(toolGLOWSTONE).setUnlocalizedName("GlowstoneAxe");
+			GlowstoneShovel = new ItemMekanismShovel(toolGLOWSTONE).setUnlocalizedName("GlowstoneShovel");
+			GlowstoneHoe = new ItemMekanismHoe(toolGLOWSTONE).setUnlocalizedName("GlowstoneHoe");
+			GlowstoneSword = new ItemMekanismSword(toolGLOWSTONE).setUnlocalizedName("GlowstoneSword");
+			
+			GlowstonePickaxe.setHarvestLevel("pickaxe", toolGLOWSTONE.getHarvestLevel());
+			GlowstoneAxe.setHarvestLevel("axe", toolGLOWSTONE.getHarvestLevel());
+			GlowstoneShovel.setHarvestLevel("shovel", toolGLOWSTONE.getHarvestLevel());
+		}
+
 		//Steel
-		SteelHelmet = new ItemMekanismArmor(armorSTEEL, Mekanism.proxy.getArmorIndex("steel"), 0).setUnlocalizedName("SteelHelmet");
-		SteelChestplate = new ItemMekanismArmor(armorSTEEL, Mekanism.proxy.getArmorIndex("steel"), 1).setUnlocalizedName("SteelChestplate");
-		SteelLeggings = new ItemMekanismArmor(armorSTEEL, Mekanism.proxy.getArmorIndex("steel"), 2).setUnlocalizedName("SteelLeggings");
-		SteelBoots = new ItemMekanismArmor(armorSTEEL, Mekanism.proxy.getArmorIndex("steel"), 3).setUnlocalizedName("SteelBoots");
-		SteelPaxel = new ItemMekanismPaxel(toolSTEEL2).setUnlocalizedName("SteelPaxel");
-		SteelPickaxe = new ItemMekanismPickaxe(toolSTEEL).setUnlocalizedName("SteelPickaxe");
-		SteelAxe = new ItemMekanismAxe(toolSTEEL).setUnlocalizedName("SteelAxe");
-		SteelShovel = new ItemMekanismShovel(toolSTEEL).setUnlocalizedName("SteelShovel");
-		SteelHoe = new ItemMekanismHoe(toolSTEEL).setUnlocalizedName("SteelHoe");
-		SteelSword = new ItemMekanismSword(toolSTEEL).setUnlocalizedName("SteelSword");
-		
-		SteelPaxel.setHarvestLevel("paxel", toolSTEEL2.getHarvestLevel());
-		SteelPickaxe.setHarvestLevel("pickaxe", toolSTEEL.getHarvestLevel());
-		SteelAxe.setHarvestLevel("axe", toolSTEEL.getHarvestLevel());
-		SteelShovel.setHarvestLevel("shovel", toolSTEEL.getHarvestLevel());
-		
+		if( FeaturePrefs.ARMOR_STEEL.enabled ) {
+			SteelHelmet = new ItemMekanismArmor(armorSTEEL, Mekanism.proxy.getArmorIndex("steel"), 0).setUnlocalizedName("SteelHelmet");
+			SteelChestplate = new ItemMekanismArmor(armorSTEEL, Mekanism.proxy.getArmorIndex("steel"), 1).setUnlocalizedName("SteelChestplate");
+			SteelLeggings = new ItemMekanismArmor(armorSTEEL, Mekanism.proxy.getArmorIndex("steel"), 2).setUnlocalizedName("SteelLeggings");
+			SteelBoots = new ItemMekanismArmor(armorSTEEL, Mekanism.proxy.getArmorIndex("steel"), 3).setUnlocalizedName("SteelBoots");
+		}
+		if( FeaturePrefs.ARMOR_STEEL.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {	
+				SteelPaxel = new ItemMekanismPaxel(toolSTEEL2).setUnlocalizedName("SteelPaxel");
+				SteelPaxel.setHarvestLevel("paxel", toolSTEEL2.getHarvestLevel());
+			}
+			SteelPickaxe = new ItemMekanismPickaxe(toolSTEEL).setUnlocalizedName("SteelPickaxe");
+			SteelAxe = new ItemMekanismAxe(toolSTEEL).setUnlocalizedName("SteelAxe");
+			SteelShovel = new ItemMekanismShovel(toolSTEEL).setUnlocalizedName("SteelShovel");
+			SteelHoe = new ItemMekanismHoe(toolSTEEL).setUnlocalizedName("SteelHoe");
+			SteelSword = new ItemMekanismSword(toolSTEEL).setUnlocalizedName("SteelSword");
+			
+			SteelPickaxe.setHarvestLevel("pickaxe", toolSTEEL.getHarvestLevel());
+			SteelAxe.setHarvestLevel("axe", toolSTEEL.getHarvestLevel());
+			SteelShovel.setHarvestLevel("shovel", toolSTEEL.getHarvestLevel());
+		}
+
 		//Base Paxels
-		WoodPaxel = new ItemMekanismPaxel(ToolMaterial.WOOD).setUnlocalizedName("WoodPaxel");
-		StonePaxel = new ItemMekanismPaxel(ToolMaterial.STONE).setUnlocalizedName("StonePaxel");
-		IronPaxel = new ItemMekanismPaxel(ToolMaterial.IRON).setUnlocalizedName("IronPaxel");
-		DiamondPaxel = new ItemMekanismPaxel(ToolMaterial.EMERALD).setUnlocalizedName("DiamondPaxel");
-		GoldPaxel = new ItemMekanismPaxel(ToolMaterial.GOLD).setUnlocalizedName("GoldPaxel");
-		
-		WoodPaxel.setHarvestLevel("paxel", ToolMaterial.WOOD.getHarvestLevel());
-		StonePaxel.setHarvestLevel("paxel", ToolMaterial.STONE.getHarvestLevel());
-		IronPaxel.setHarvestLevel("paxel", ToolMaterial.IRON.getHarvestLevel());
-		DiamondPaxel.setHarvestLevel("paxel", ToolMaterial.EMERALD.getHarvestLevel());
-		GoldPaxel.setHarvestLevel("paxel", ToolMaterial.GOLD.getHarvestLevel());
+		if( FeaturePrefs.PAXEL.enabled ) {
+			WoodPaxel = new ItemMekanismPaxel(ToolMaterial.WOOD).setUnlocalizedName("WoodPaxel");
+			StonePaxel = new ItemMekanismPaxel(ToolMaterial.STONE).setUnlocalizedName("StonePaxel");
+			IronPaxel = new ItemMekanismPaxel(ToolMaterial.IRON).setUnlocalizedName("IronPaxel");
+			DiamondPaxel = new ItemMekanismPaxel(ToolMaterial.EMERALD).setUnlocalizedName("DiamondPaxel");
+			GoldPaxel = new ItemMekanismPaxel(ToolMaterial.GOLD).setUnlocalizedName("GoldPaxel");
+			
+			WoodPaxel.setHarvestLevel("paxel", ToolMaterial.WOOD.getHarvestLevel());
+			StonePaxel.setHarvestLevel("paxel", ToolMaterial.STONE.getHarvestLevel());
+			IronPaxel.setHarvestLevel("paxel", ToolMaterial.IRON.getHarvestLevel());
+			DiamondPaxel.setHarvestLevel("paxel", ToolMaterial.EMERALD.getHarvestLevel());
+			GoldPaxel.setHarvestLevel("paxel", ToolMaterial.GOLD.getHarvestLevel());
+		}
 		
 		Mekanism.configuration.save();
 		
 		//Registrations
 		//Base
-		GameRegistry.registerItem(WoodPaxel, "WoodPaxel");
-		GameRegistry.registerItem(StonePaxel, "StonePaxel");
-		GameRegistry.registerItem(IronPaxel, "IronPaxel");
-		GameRegistry.registerItem(DiamondPaxel, "DiamondPaxel");
-		GameRegistry.registerItem(GoldPaxel, "GoldPaxel");
+		if( FeaturePrefs.PAXEL.enabled ) {
+			GameRegistry.registerItem(WoodPaxel, "WoodPaxel");
+			GameRegistry.registerItem(StonePaxel, "StonePaxel");
+			GameRegistry.registerItem(IronPaxel, "IronPaxel");
+			GameRegistry.registerItem(DiamondPaxel, "DiamondPaxel");
+			GameRegistry.registerItem(GoldPaxel, "GoldPaxel");
+		}
 		
 		//Obsidian
-		GameRegistry.registerItem(ObsidianHelmet, "ObsidianHelmet");
-		GameRegistry.registerItem(ObsidianChestplate, "ObsidianChestplate");
-		GameRegistry.registerItem(ObsidianLeggings, "ObsidianLeggings");
-		GameRegistry.registerItem(ObsidianBoots, "ObsidianBoots");
-		GameRegistry.registerItem(ObsidianPaxel, "ObsidianPaxel");
-		GameRegistry.registerItem(ObsidianPickaxe, "ObsidianPickaxe");
-		GameRegistry.registerItem(ObsidianAxe, "ObsidianAxe");
-		GameRegistry.registerItem(ObsidianShovel, "ObsidianShovel");
-		GameRegistry.registerItem(ObsidianHoe, "ObsidianHoe");
-		GameRegistry.registerItem(ObsidianSword, "ObsidianSword");
-		
+		if( FeaturePrefs.ARMOR_OBSIDIAN.enabled ) {
+			GameRegistry.registerItem(ObsidianHelmet, "ObsidianHelmet");
+			GameRegistry.registerItem(ObsidianChestplate, "ObsidianChestplate");
+			GameRegistry.registerItem(ObsidianLeggings, "ObsidianLeggings");
+			GameRegistry.registerItem(ObsidianBoots, "ObsidianBoots");
+		}
+		if( FeaturePrefs.TOOL_OBSIDIAN.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				GameRegistry.registerItem(ObsidianPaxel, "ObsidianPaxel");
+			}
+			GameRegistry.registerItem(ObsidianPickaxe, "ObsidianPickaxe");
+			GameRegistry.registerItem(ObsidianAxe, "ObsidianAxe");
+			GameRegistry.registerItem(ObsidianShovel, "ObsidianShovel");
+			GameRegistry.registerItem(ObsidianHoe, "ObsidianHoe");
+			GameRegistry.registerItem(ObsidianSword, "ObsidianSword");
+		}
+
 		//Lazuli
-		GameRegistry.registerItem(LazuliHelmet, "LapisLazuliHelmet");
-		GameRegistry.registerItem(LazuliChestplate, "LapisLazuliChestplate");
-		GameRegistry.registerItem(LazuliLeggings, "LapisLazuliLeggings");
-		GameRegistry.registerItem(LazuliBoots, "LapisLazuliBoots");
-		GameRegistry.registerItem(LazuliPaxel, "LapisLazuliPaxel");
-		GameRegistry.registerItem(LazuliPickaxe, "LapisLazuliPickaxe");
-		GameRegistry.registerItem(LazuliAxe, "LapisLazuliAxe");
-		GameRegistry.registerItem(LazuliShovel, "LapisLazuliShovel");
-		GameRegistry.registerItem(LazuliHoe, "LapisLazuliHoe");
-		GameRegistry.registerItem(LazuliSword, "LapisLazuliSword");
-		
+		if( FeaturePrefs.ARMOR_LAZULI.enabled ) {
+			GameRegistry.registerItem(LazuliHelmet, "LapisLazuliHelmet");
+			GameRegistry.registerItem(LazuliChestplate, "LapisLazuliChestplate");
+			GameRegistry.registerItem(LazuliLeggings, "LapisLazuliLeggings");
+			GameRegistry.registerItem(LazuliBoots, "LapisLazuliBoots");
+		}
+		if( FeaturePrefs.TOOL_LAZULI.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				GameRegistry.registerItem(LazuliPaxel, "LapisLazuliPaxel");
+			}
+			GameRegistry.registerItem(LazuliPickaxe, "LapisLazuliPickaxe");
+			GameRegistry.registerItem(LazuliAxe, "LapisLazuliAxe");
+			GameRegistry.registerItem(LazuliShovel, "LapisLazuliShovel");
+			GameRegistry.registerItem(LazuliHoe, "LapisLazuliHoe");
+			GameRegistry.registerItem(LazuliSword, "LapisLazuliSword");
+		}
+			
 		//Osmium
-		GameRegistry.registerItem(OsmiumHelmet, "OsmiumHelmet");
-		GameRegistry.registerItem(OsmiumChestplate, "OsmiumChestplate");
-		GameRegistry.registerItem(OsmiumLeggings, "OsmiumLeggings");
-		GameRegistry.registerItem(OsmiumBoots, "OsmiumBoots");
-		GameRegistry.registerItem(OsmiumPaxel, "OsmiumPaxel");
-		GameRegistry.registerItem(OsmiumPickaxe, "OsmiumPickaxe");
-		GameRegistry.registerItem(OsmiumAxe, "OsmiumAxe");
-		GameRegistry.registerItem(OsmiumShovel, "OsmiumShovel");
-		GameRegistry.registerItem(OsmiumHoe, "OsmiumHoe");
-		GameRegistry.registerItem(OsmiumSword, "OsmiumSword");
-		
-		//Redstone
-		GameRegistry.registerItem(BronzeHelmet, "BronzeHelmet");
-		GameRegistry.registerItem(BronzeChestplate, "BronzeChestplate");
-		GameRegistry.registerItem(BronzeLeggings, "BronzeLeggings");
-		GameRegistry.registerItem(BronzeBoots, "BronzeBoots");
-		GameRegistry.registerItem(BronzePaxel, "BronzePaxel");
-		GameRegistry.registerItem(BronzePickaxe, "BronzePickaxe");
-		GameRegistry.registerItem(BronzeAxe, "BronzeAxe");
-		GameRegistry.registerItem(BronzeShovel, "BronzeShovel");
-		GameRegistry.registerItem(BronzeHoe, "BronzeHoe");
-		GameRegistry.registerItem(BronzeSword, "BronzeSword");
-		
+		if( FeaturePrefs.ARMOR_OSMIUM.enabled ) {
+			GameRegistry.registerItem(OsmiumHelmet, "OsmiumHelmet");
+			GameRegistry.registerItem(OsmiumChestplate, "OsmiumChestplate");
+			GameRegistry.registerItem(OsmiumLeggings, "OsmiumLeggings");
+			GameRegistry.registerItem(OsmiumBoots, "OsmiumBoots");
+		}
+		if( FeaturePrefs.TOOL_OSMIUM.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				GameRegistry.registerItem(OsmiumPaxel, "OsmiumPaxel");
+			}
+			GameRegistry.registerItem(OsmiumPickaxe, "OsmiumPickaxe");
+			GameRegistry.registerItem(OsmiumAxe, "OsmiumAxe");
+			GameRegistry.registerItem(OsmiumShovel, "OsmiumShovel");
+			GameRegistry.registerItem(OsmiumHoe, "OsmiumHoe");
+			GameRegistry.registerItem(OsmiumSword, "OsmiumSword");
+		}
+			
+		//Bronze
+		if( FeaturePrefs.ARMOR_BRONZE.enabled ) {
+			GameRegistry.registerItem(BronzeHelmet, "BronzeHelmet");
+			GameRegistry.registerItem(BronzeChestplate, "BronzeChestplate");
+			GameRegistry.registerItem(BronzeLeggings, "BronzeLeggings");
+			GameRegistry.registerItem(BronzeBoots, "BronzeBoots");
+		}
+		if( FeaturePrefs.TOOL_BRONZE.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				GameRegistry.registerItem(BronzePaxel, "BronzePaxel");
+			}
+			GameRegistry.registerItem(BronzePickaxe, "BronzePickaxe");
+			GameRegistry.registerItem(BronzeAxe, "BronzeAxe");
+			GameRegistry.registerItem(BronzeShovel, "BronzeShovel");
+			GameRegistry.registerItem(BronzeHoe, "BronzeHoe");
+			GameRegistry.registerItem(BronzeSword, "BronzeSword");
+		}
+			
 		//Glowstone
-		GameRegistry.registerItem(GlowstonePaxel, "GlowstonePaxel");
-		GameRegistry.registerItem(GlowstonePickaxe, "GlowstonePickaxe");
-		GameRegistry.registerItem(GlowstoneAxe, "GlowstoneAxe");
-		GameRegistry.registerItem(GlowstoneShovel, "GlowstoneShovel");
-		GameRegistry.registerItem(GlowstoneHoe, "GlowstoneHoe");
-		GameRegistry.registerItem(GlowstoneSword, "GlowstoneSword");
-		GameRegistry.registerItem(GlowstoneHelmet, "GlowstoneHelmet");
-		GameRegistry.registerItem(GlowstoneChestplate, "GlowstoneChestplate");
-		GameRegistry.registerItem(GlowstoneLeggings, "GlowstoneLeggings");
-		GameRegistry.registerItem(GlowstoneBoots, "GlowstoneBoots");
-		
+		if( FeaturePrefs.TOOL_GLOWSTONE.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				GameRegistry.registerItem(GlowstonePaxel, "GlowstonePaxel");
+			}
+			GameRegistry.registerItem(GlowstonePickaxe, "GlowstonePickaxe");
+			GameRegistry.registerItem(GlowstoneAxe, "GlowstoneAxe");
+			GameRegistry.registerItem(GlowstoneShovel, "GlowstoneShovel");
+			GameRegistry.registerItem(GlowstoneHoe, "GlowstoneHoe");
+			GameRegistry.registerItem(GlowstoneSword, "GlowstoneSword");
+		}
+		if( FeaturePrefs.ARMOR_GLOWSTONE.enabled ) {
+			GameRegistry.registerItem(GlowstoneHelmet, "GlowstoneHelmet");
+			GameRegistry.registerItem(GlowstoneChestplate, "GlowstoneChestplate");
+			GameRegistry.registerItem(GlowstoneLeggings, "GlowstoneLeggings");
+			GameRegistry.registerItem(GlowstoneBoots, "GlowstoneBoots");
+		}
+			
 		//Steel
-		GameRegistry.registerItem(SteelPaxel, "SteelPaxel");
-		GameRegistry.registerItem(SteelPickaxe, "SteelPickaxe");
-		GameRegistry.registerItem(SteelAxe, "SteelAxe");
-		GameRegistry.registerItem(SteelShovel, "SteelShovel");
-		GameRegistry.registerItem(SteelHoe, "SteelHoe");
-		GameRegistry.registerItem(SteelSword, "SteelSword");
-		GameRegistry.registerItem(SteelHelmet, "SteelHelmet");
-		GameRegistry.registerItem(SteelChestplate, "SteelChestplate");
-		GameRegistry.registerItem(SteelLeggings, "SteelLeggings");
-		GameRegistry.registerItem(SteelBoots, "SteelBoots");
+		if( FeaturePrefs.TOOL_STEEL.enabled ) {
+			if( FeaturePrefs.PAXEL.enabled ) {
+				GameRegistry.registerItem(SteelPaxel, "SteelPaxel");
+			}
+			GameRegistry.registerItem(SteelPickaxe, "SteelPickaxe");
+			GameRegistry.registerItem(SteelAxe, "SteelAxe");
+			GameRegistry.registerItem(SteelShovel, "SteelShovel");
+			GameRegistry.registerItem(SteelHoe, "SteelHoe");
+			GameRegistry.registerItem(SteelSword, "SteelSword");
+		}
+		if( FeaturePrefs.ARMOR_STEEL.enabled ) {
+			GameRegistry.registerItem(SteelHelmet, "SteelHelmet");
+			GameRegistry.registerItem(SteelChestplate, "SteelChestplate");
+			GameRegistry.registerItem(SteelLeggings, "SteelLeggings");
+			GameRegistry.registerItem(SteelBoots, "SteelBoots");
+		}
 	}
 	
 	@SubscribeEvent
